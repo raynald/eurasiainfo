@@ -1,0 +1,169 @@
+{% load blog_tags keyword_tags mezzanine_tags i18n %}
+
+<div class="span4">
+    <div class="sidebar">
+        <div class="widget">
+            <form class="form-search">
+                <input type="text" class="input-medium search-query">
+                <button type="submit" class="btn dark_btn">Search</button>
+            </form>
+        </div>
+        <div class="widget">
+            <h2 class="title"><span>text widjet</span></h2>
+            <p>Praesent vestibulum molestie lacus. Aenean nonummy hendrerit mauris. Phasellus porta. Fusce suscipit varius mi nascetur ridiculus mus. Nulla dui. Fusce feugiat malesuada odio. Morbi nunc odio, gravida at, cursus nec, luctus a, lorem. Maecenas tristique orci ac sem. Duis ultricies pharetra magna. Donec accumsan malesuada orci. Donec sit amet eros. Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p>
+            <p><a href="#" class="arrow_link">Read more</a></p>
+        </div>
+
+        <div class="widget">
+            <h2 class="title"><span>recent posts</span></h2>
+            <ul class="recent_post">
+                <li>
+                    <a href="#"><img src="img/img8.jpg" alt="" /></a>
+                    <div><a href="#">It is a long established fact that a reader will be distracted </a></div>
+                    16th July, 2020
+                    <div class="clear"></div>
+                </li>
+                <li>
+                    <a href="#"><img src="img/img9.jpg" alt="" /></a>
+                    <div><a href="#">It is a long established fact that a reader will be distracted </a></div>
+                    16th July, 2020
+                    <div class="clear"></div>
+                </li>
+                <li>
+                    <a href="#"><img src="img/img10.jpg" alt="" /></a>
+                    <div><a href="#">It is a long established fact that a reader will be distracted </a></div>
+                    16th July, 2020
+                    <div class="clear"></div>
+                </li>
+            </ul>
+            <p><a href="#" class="arrow_link">Go to the portfolio</a></p>
+        </div>
+
+        <div class="widget">
+            <h2 class="title"><span>Latest tweets</span></h2>
+            <div class="tweet_block"></div>
+        </div>
+        <div class="widget tags">
+            <h2 class="title"><span>tags</span></h2>
+            <a href="#">Lorem ipsum</a>
+            <a href="#">Dolor</a>
+            <a href="#">Long established</a>
+            <a href="#">Sit amet</a>
+            <a href="#">Latin words</a>
+            <a href="#">Excepteur sint</a>
+        </div>
+        <div class="widget">
+            <h2 class="title"><span>links</span></h2>
+            <ul class="links">
+                <li><a href="#">Lorem ipsum dolor sit amet, consectetur</a></li>
+                <li><a href="#">Adipisicing elit, sed do eiusmod tempor incididunt</a></li>
+                <li><a href="#">Ut labore et dolore magna aliqua.</a></li>
+                <li><a href="#">Ut enim ad minim veniam, quis nostrud exercitation ullamco</a></li>
+                <li><a href="#">Laboris nisi ut aliquip ex ea commodo consequat.</a></li>
+                <li><a href="#">Duis aute irure dolor in reprehenderit</a></li>
+                <li><a href="#">In voluptate velit esse cillum</a></li>
+                <li><a href="#">Excepteur sint occaecat cupidatat non proident</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+{% block blog_recent_posts %}
+{% blog_recent_posts 5 as recent_posts %}
+{% if recent_posts %}
+<div class="widget"><h2 class="title"><span>{% trans "Recent Posts" %}</span></h2>
+<ul class="list-unstyled recent-posts">
+{% for recent_post in recent_posts %}
+<li>
+    {% spaceless %}
+    <a href="{{ recent_post.get_absolute_url }}">
+        {% if settings.BLOG_USE_FEATURED_IMAGE and recent_post.featured_image %}
+        <img src="{{ MEDIA_URL }}{% thumbnail recent_post.featured_image 24 24 %}">
+        {% endif %}
+    {{ recent_post.title }}
+    </a>
+    {% endspaceless %}
+</li>
+{% endfor %}
+</ul></div>
+{% endif %}
+{% endblock %}
+
+{% block blog_months %}
+{% blog_months as months %}
+{% if months %}
+<div class="widget"><h2 class="title"><span>{% trans "Archive" %}</span></h2>
+{% for month in months %}
+    {% ifchanged month.date.year %}
+        {% if not forloop.first %}</ul>{% endif %}
+        <h6>{{ month.date.year }}</h6><ul class="list-unstyled">
+    {% endifchanged %}
+    <li><a href="{% url "blog_post_list_month" year=month.date.year month=month.date.month %}"
+        >{{ month.date|date:"F" }}</a> ({{ month.post_count }})</li>
+{% endfor %}
+</ul></div>
+{% endif %}
+{% endblock %}
+
+{% block blog_categories %}
+{% blog_categories as categories %}
+{% if categories %}
+<div class="widget"><h2 class="title"><span>{% trans "Categories" %}</span></h2>
+<ul class="list-unstyled">
+{% for category in categories %}
+<li><a href="{% url "blog_post_list_category" category.slug %}"
+    >{{ category }}</a> ({{ category.post_count }})</li>
+{% endfor %}
+</ul></div>
+{% endif %}
+{% endblock %}
+
+{% block blog_keywords %}
+{% keywords_for blog.blogpost as tags %}
+{% if tags %}
+<div class="widget"><h2 class="title"><span>{% trans "Tags" %}</span></h2>
+<ul class="list-inline tag-cloud">
+{% for tag in tags %}
+<li>
+    <a href="{% url "blog_post_list_tag" tag.slug %}"
+        class="tag-weight-{{ tag.weight }}">{{ tag }}</a>
+    ({{ tag.item_count }})
+</li>
+{% endfor %}
+</ul></div>
+{% endif %}
+{% endblock %}
+
+{% block blog_authors %}
+{% blog_authors as authors %}
+{% if authors %}
+<div class="widget"><h2 class="title"><span>{% trans "Authors" %}</span></h2>
+<ul class="list-unstyled">
+{% for author in authors %}
+    <li><a href="{% url "blog_post_list_author" author.username %}"
+        >{{ author.get_full_name|default:author.username }}</a>
+        ({{ author.post_count }})</li>
+{% endfor %}
+</ul></div>
+{% endif %}
+{% endblock %}
+
+{% block blog_feeds %}
+<div class="widget"><h2 class="title"><span>{% trans "Feeds" %}</span></h2>
+{% if tag %}
+    <a href="{% url "blog_post_feed_tag" tag.slug "rss" %}">{% trans "RSS" %}</a> /
+    <a href="{% url "blog_post_feed_tag" tag.slug "atom" %}">{% trans "Atom" %}</a>
+{% endif %}
+{% if category %}
+    <a href="{% url "blog_post_feed_category" category.slug "rss" %}">{% trans "RSS" %}</a> /
+    <a href="{% url "blog_post_feed_category" category.slug "atom" %}">{% trans "Atom" %}</a>
+{% endif %}
+{% if author %}
+    <a href="{% url "blog_post_feed_author" author.username "rss" %}">{% trans "RSS" %}</a> /
+    <a href="{% url "blog_post_feed_author" author.username "atom" %}">{% trans "Atom" %}</a>
+{% endif %}
+{% if not tag and not category and not author %}
+    <a href="{% url "blog_post_feed" "rss" %}">{% trans "RSS" %}</a> /
+    <a href="{% url "blog_post_feed" "atom" %}">{% trans "Atom" %}</a>
+{% endif %}</div>
+{% endblock %}
