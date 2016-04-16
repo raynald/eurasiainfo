@@ -8,6 +8,26 @@
                 <button type="submit" class="btn dark_btn">Search</button>
             </form>
         </div>
+        {% block blog_e_newspapers %}
+        {% blog_recent_posts limit=5 tag="电子时报" as e_newspapers %}
+        {% if e_newspapers %}
+        <div class="widget"><h2 class="title"><span>{% trans "E Newspapers" %}</span></h2>
+            <ul class="list-unstyled recent-posts">
+                {% for e_newspaper in e_newspapers %}
+                <li>
+                    {% spaceless %}
+                    <a href="{{ recent_post.get_absolute_url }}">
+                        {% if settings.BLOG_USE_FEATURED_IMAGE and e_newspaper.featured_image %}
+                        <img src="{{ MEDIA_URL }}{% thumbnail e_newspaper.featured_image 24 24 %}">
+                        {% endif %}
+                        {{ e_newspaper.title }}
+                    </a>
+                    {% endspaceless %}
+                </li>
+                {% endfor %}
+            </ul></div>
+        {% endif %}
+        {% endblock %}
         <div class="widget">
             <h2 class="title"><span>text widjet</span></h2>
             <p>Praesent vestibulum molestie lacus. Aenean nonummy hendrerit mauris. Phasellus porta. Fusce suscipit varius mi nascetur ridiculus mus. Nulla dui. Fusce feugiat malesuada odio. Morbi nunc odio, gravida at, cursus nec, luctus a, lorem. Maecenas tristique orci ac sem. Duis ultricies pharetra magna. Donec accumsan malesuada orci. Donec sit amet eros. Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p>

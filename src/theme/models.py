@@ -5,7 +5,7 @@ from mezzanine.core.fields import FileField, RichTextField
 from mezzanine.core.models import RichText, Orderable, Slugged
 from mezzanine.pages.models import Page
 from mezzanine.utils.models import upload_to
-
+from mezzanine.blog.models import BlogPost
 
 class HomePage(Page, RichText):
     '''
@@ -61,3 +61,9 @@ class Portfolio(Page):
     class Meta:
         verbose_name = _("Portfolio")
         verbose_name_plural = _("Portfolios")
+
+
+class ENewspaper(BlogPost):
+    class Meta:
+        verbose_name = _("ENewspaper")
+        verbose_name_plural =_("Enewspapers")
