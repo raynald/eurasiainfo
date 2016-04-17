@@ -1,0 +1,90 @@
+{% extends "pages/page.html" %}
+
+{% load mezzanine_tags staticfiles %}
+
+{% block main_wrapper %}
+{{ block.super }}
+<section>
+    <h2 class="title"><span>Our Team</span></h2>
+    <div class="row">
+        <h3>主编CEO</h3>
+        <div class="span3">
+            <div class="profile"><img alt="" src="{{ MEDIA_URL }}uploads/team/Ailian_Zhu.png" />
+                <h4>朱爱莲</h4>
+                <div class="profile_title">主编</div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <h3>采访市场部</h3>
+        <div class="span3">
+            <div class="profile"><img alt="" src="{{ MEDIA_URL }}uploads/team/Lin_Wei.png" />
+                <h4>卫林</h4>
+                <div class="profile_title">采访市场部经理</div>
+            </div>
+        </div>
+        <div class="span3">
+            <div class="profile"><img alt="" src="{{ MEDIA_URL }}uploads/team/Yawen_Chen.png" />
+                <h4>陈雅雯</h4>
+                <div class="profile_title">记者</div>
+            </div>
+        </div>
+        <div class="span3">
+            <div class="profile"><img alt="" src="{{ MEDIA_URL }}uploads/team/Yulin_Liu.png" />
+                <h4>刘玉林</h4>
+                <div class="profile_title">记者</div>
+            </div>
+        </div>
+        <div class="span3">
+            <div class="profile"><img alt="" src="{{ MEDIA_URL }}uploads/team/Qin_Xu.png" />
+                <h4>许琴</h4>
+                <div class="profile_title">记者</div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <h3>编辑技术部</h3>
+        <div class="span3">
+            <div class="profile"><img alt="" src="{{ MEDIA_URL }}uploads/team/Yifan_Su.png" />
+                <h4>卫林</h4>
+                <div class="profile_title">网站架构</div>
+            </div>
+        </div>
+        <div class="span3">
+            <div class="profile"><img alt="" src="{{ MEDIA_URL }}uploads/team/Jie_Deng.png" />
+                <h4>邓捷</h4>
+                <div class="profile_title">排版设计</div>
+            </div>
+        </div>
+        <div class="span3">
+            <div class="profile"><img alt="" src="{{ MEDIA_URL }}uploads/team/Summer_Miao.png" />
+                <h4>缪姝雯</h4>
+                <div class="profile_title">编辑 & 翻译</div>
+            </div>
+        </div>
+        <div class="span3">
+            <div class="profile"><img alt="" src="{{ MEDIA_URL }}uploads/team/Yike_Gu.png" />
+                <h4>谷一珂</h4>
+                <div class="profile_title">编辑 & 翻译</div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="span8">
+            <p class="title">If you have any cooperation with the editors, please send email to <strong>editor@eurasiainfo.ch</strong>.
+                For advertising please contact the advertising department – <strong>ads@eurasiainfo.ch</strong>.
+            </p>
+            <div id="map">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2701.832969004788!2d8.537516515479217!3d47.37617841186046!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47900a062efbe80f%3A0xab04192b0060b7df!2sBahnhofstrasse+100%2C+8001+Z%C3%BCrich%2C+Switzerland!5e0!3m2!1sen!2snl!4v1460890026350" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+            <p>Bahnhofstrasse 100号， CH-8001 苏黎世，瑞士</p>
+            <p>Email: <a href="mailto:#">news@EurAsiaInfo.ch</a><br/>
+                Web: <a href="#">http://eurasiaifo.ch</a>
+            </p>
+        </div>
+    </div>
+
+</section>
+
+{% endblock %}
+
+{% block right_wrapper %}{% endblock %}
