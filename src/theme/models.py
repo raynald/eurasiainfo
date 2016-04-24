@@ -25,6 +25,9 @@ class HomePage(Page, RichText):
     latest_posts_heading = models.CharField(max_length=200,
                                             default="Latest Posts")
 
+    def __unicode__(self):
+        return unicode(self.heading) or u''
+
     class Meta:
         verbose_name = _("Home page")
         verbose_name_plural = _("Home pages")
